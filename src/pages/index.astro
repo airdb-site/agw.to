@@ -1,0 +1,284 @@
+---
+import Base from '../layouts/Base.astro';
+
+const stats = [
+  { value: '<10ms', label: 'median redirect latency' },
+  { value: '99.99%', label: 'availability target' },
+  { value: '300+', label: 'edge locations worldwide' },
+  { value: '301/302', label: 'standards-compliant, always' },
+];
+
+const cities = [
+  'TOKYO', 'SEOUL', 'TAIPEI', 'HONG KONG', 'SINGAPORE', 'SYDNEY', 'MUMBAI',
+  'DUBAI', 'FRANKFURT', 'AMSTERDAM', 'LONDON', 'PARIS', 'STOCKHOLM',
+  'VIRGINIA', 'OREGON', 'SÃO PAULO', 'JOHANNESBURG',
+];
+
+const features = [
+  {
+    code: 'F-01',
+    title: 'Branded short domains',
+    body: 'Bring your own domain — go.yourbrand.com — and let agw.to answer for it. Every link you share carries your name, not ours.',
+  },
+  {
+    code: 'F-02',
+    title: 'Smart routing',
+    body: 'One link, many destinations. Split traffic by country, language, device, or time of day. iOS to the App Store, Android to Play, desktop to web.',
+  },
+  {
+    code: 'F-03',
+    title: 'Click analytics',
+    body: 'Every hop is measured: clicks, referrers, geography, devices. Know exactly which channel moved the needle — without a tag manager.',
+  },
+  {
+    code: 'F-04',
+    title: 'QR codes built in',
+    body: 'Each link ships with a QR code. Print it once — then repoint the destination whenever you like. The code on the poster never changes.',
+  },
+  {
+    code: 'F-05',
+    title: 'Link governance',
+    body: 'Expiry dates, password gates, click caps, instant rewiring, and a graceful fallback page when a link retires. Links you can operate, not just create.',
+  },
+  {
+    code: 'F-06',
+    title: 'Developer API',
+    body: 'Create, update, and inspect links over a clean REST API. Mint thousands of short links from your own system in a single batch call.',
+  },
+];
+
+const steps = [
+  {
+    n: '01',
+    title: 'Paste any URL',
+    body: 'Long, ugly, parameter-riddled — we take it as it is.',
+  },
+  {
+    n: '02',
+    title: 'Get your short link',
+    body: 'agw.to/yours — or on your own branded domain.',
+  },
+  {
+    n: '03',
+    title: 'We handle the hop',
+    body: 'Resolved at the nearest edge node, in single-digit milliseconds, every single time.',
+  },
+];
+
+const scenarios = [
+  { tag: 'MARKETING', body: 'Campaign links with UTM baked in and attribution you can trust.' },
+  { tag: 'SMS & PRINT', body: 'Short enough for a text message. Stable enough for a billboard.' },
+  { tag: 'APP GROWTH', body: 'One link that opens the app if installed, the store if not.' },
+  { tag: 'SOCIAL BIO', body: 'A single memorable link that you can repoint every week.' },
+  { tag: 'DOCS & OPS', body: 'Human-readable shortcuts to dashboards, runbooks, and wikis.' },
+  { tag: 'EVENTS', body: 'QR on the badge, destination updated live as the agenda shifts.' },
+];
+---
+
+<Base>
+  <!-- nav -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-line/70 bg-ink/80 backdrop-blur-md">
+    <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <a href="/" class="font-mono text-sm font-semibold tracking-tight text-snow">
+        agw.to<span class="text-amber">/→</span>
+      </a>
+      <div class="hidden items-center gap-8 font-mono text-xs tracking-widest text-fog uppercase sm:flex">
+        <a href="#features" class="transition-colors hover:text-amber">Features</a>
+        <a href="#network" class="transition-colors hover:text-amber">Network</a>
+        <a href="#scenarios" class="transition-colors hover:text-amber">Scenarios</a>
+      </div>
+      <a
+        href="#contact"
+        class="border border-amber/60 px-4 py-2 font-mono text-xs tracking-widest text-amber uppercase transition-colors hover:bg-amber hover:text-ink"
+      >
+        Early access
+      </a>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section class="relative overflow-hidden pt-16">
+    <div class="grid-bg absolute inset-0"></div>
+    <div class="hero-glow absolute inset-0"></div>
+
+    <div class="relative mx-auto grid max-w-6xl gap-16 px-6 pt-24 pb-20 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:pt-32 lg:pb-28">
+      <div class="min-w-0">
+        <p class="eyebrow mb-6">HTTP/2 301 — MOVED, PERMANENTLY FASTER</p>
+        <h1 class="display-wide text-4xl sm:text-6xl xl:text-7xl">
+          One short link,<br />
+          <span class="text-amber">to&nbsp;everywhere.</span>
+        </h1>
+        <p class="mt-8 max-w-md text-lg leading-relaxed text-fog">
+          agw.to is a redirect gateway. Any URL becomes a short, branded link —
+          resolved at the network edge in single-digit milliseconds, with
+          availability you can set a watch by.
+        </p>
+
+        <!-- packet route -->
+        <div class="mt-12 max-w-md">
+          <div class="flex items-center justify-between font-mono text-xs text-fog-dim">
+            <span class="text-amber-soft">agw.to/launch</span>
+            <span>your-product.com</span>
+          </div>
+          <div class="relative mt-3 h-px w-full route-track">
+            <span class="packet absolute -top-[3px] h-[7px] w-[7px] rounded-full bg-amber"></span>
+          </div>
+          <p class="mt-3 font-mono text-xs text-fog-dim">— one hop · 7ms · edge: tyo1</p>
+        </div>
+      </div>
+
+      <!-- terminal -->
+      <div class="term min-w-0 rounded-lg p-1">
+        <div class="flex items-center gap-2 px-4 py-3">
+          <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
+          <span class="ml-3 font-mono text-xs text-fog-dim">trace — agw edge</span>
+        </div>
+        <div class="border-t border-line px-5 py-6 font-mono text-[13px] leading-7">
+          <p class="term-line" style="animation-delay: 0.3s">
+            <span class="text-fog-dim">$</span>
+            <span class="term-cmd text-snow">curl -I https://agw.to/launch</span>
+          </p>
+          <p class="term-line text-amber" style="animation-delay: 1.8s">HTTP/2 301</p>
+          <p class="term-line break-all text-fog" style="animation-delay: 2.1s">
+            <span class="text-fog-dim">location:</span> https://your-product.com/campaign
+          </p>
+          <p class="term-line text-fog" style="animation-delay: 2.4s">
+            <span class="text-fog-dim">server:</span> agw-edge/tyo1
+          </p>
+          <p class="term-line text-fog" style="animation-delay: 2.7s">
+            <span class="text-fog-dim">x-agw-latency:</span> <span class="text-ok">7ms</span>
+          </p>
+          <p class="term-line cursor" style="animation-delay: 3.2s">
+            <span class="text-fog-dim">$</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- stats -->
+  <section id="network" class="border-y border-line bg-panel/40">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-line lg:grid-cols-4">
+      {
+        stats.map((s, i) => (
+          <div class="reveal px-6 py-10 lg:px-10" style={`--reveal-delay: ${i * 0.08}s`}>
+            <p class="stat-value text-3xl text-snow sm:text-4xl">{s.value}</p>
+            <p class="mt-2 font-mono text-xs tracking-wider text-fog-dim uppercase">{s.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- city marquee -->
+  <div class="marquee overflow-hidden border-b border-line py-4" aria-hidden="true">
+    <div class="marquee-inner flex w-max gap-10 font-mono text-xs tracking-[0.3em] whitespace-nowrap text-fog-dim">
+      {
+        [...cities, ...cities].map((c) => (
+          <span>
+            {c} <span class="text-amber-dim">·</span>
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- features -->
+  <section id="features" class="mx-auto max-w-6xl px-6 py-24 lg:py-32">
+    <div class="reveal mb-14 flex items-end justify-between">
+      <div>
+        <p class="section-index mb-4">// 01 — CAPABILITIES</p>
+        <h2 class="display-wide text-4xl sm:text-5xl">Not shorter.<br /><span class="text-amber">Smarter.</span></h2>
+      </div>
+      <p class="hidden max-w-xs text-sm leading-relaxed text-fog lg:block">
+        A short link is the least interesting thing we make. Every agw.to link is a
+        programmable route through the network.
+      </p>
+    </div>
+
+    <div class="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((f, i) => (
+          <div class="feature-card reveal p-8" style={`--reveal-delay: ${(i % 3) * 0.08}s`}>
+            <p class="font-mono text-xs text-amber-dim">{f.code}</p>
+            <h3 class="mt-4 text-lg font-bold tracking-tight">{f.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-fog">{f.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- how it works -->
+  <section class="border-y border-line bg-panel/40">
+    <div class="mx-auto max-w-6xl px-6 py-24 lg:py-32">
+      <div class="reveal mb-14">
+        <p class="section-index mb-4">// 02 — PROTOCOL</p>
+        <h2 class="display-wide text-4xl sm:text-5xl">Three steps.<br />Then it's <span class="text-amber">our problem.</span></h2>
+      </div>
+      <div class="grid gap-10 lg:grid-cols-3">
+        {
+          steps.map((s, i) => (
+            <div class="reveal" style={`--reveal-delay: ${i * 0.1}s`}>
+              <p class="stat-value text-6xl text-line select-none">{s.n}</p>
+              <h3 class="mt-4 text-lg font-bold tracking-tight text-snow">{s.title}</h3>
+              <p class="mt-3 max-w-xs text-sm leading-relaxed text-fog">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- scenarios -->
+  <section id="scenarios" class="mx-auto max-w-6xl px-6 py-24 lg:py-32">
+    <div class="reveal mb-14">
+      <p class="section-index mb-4">// 03 — IN THE FIELD</p>
+      <h2 class="display-wide text-4xl sm:text-5xl">Wherever a link<br />has a <span class="text-amber">job to do.</span></h2>
+    </div>
+    <div class="grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        scenarios.map((s, i) => (
+          <div class="reveal border-t border-line pt-5" style={`--reveal-delay: ${(i % 3) * 0.08}s`}>
+            <p class="font-mono text-xs tracking-[0.2em] text-amber">{s.tag}</p>
+            <p class="mt-3 text-sm leading-relaxed text-fog">{s.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="relative overflow-hidden border-t border-line">
+    <div class="hero-glow absolute inset-0 rotate-180"></div>
+    <div class="relative mx-auto max-w-6xl px-6 py-28 text-center lg:py-36">
+      <p class="eyebrow reveal mb-6">STATUS: ACCEPTING EARLY TRAFFIC</p>
+      <h2 class="display-wide reveal mx-auto max-w-3xl text-5xl sm:text-6xl" style="--reveal-delay: 0.1s">
+        Point it <span class="text-amber">anywhere.</span>
+      </h2>
+      <p class="reveal mx-auto mt-6 max-w-md text-fog" style="--reveal-delay: 0.2s">
+        The gateway is warming up. Tell us where your links need to go — we'll
+        make the hop instant.
+      </p>
+      <a
+        href="mailto:hello@agw.to"
+        class="reveal mt-10 inline-block bg-amber px-8 py-4 font-mono text-sm font-semibold tracking-widest text-ink uppercase transition-transform hover:-translate-y-0.5"
+        style="--reveal-delay: 0.3s"
+      >
+        hello@agw.to →
+      </a>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="border-t border-line">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 font-mono text-xs text-fog-dim sm:flex-row sm:items-center sm:justify-between">
+      <p>
+        <span class="text-snow">agw.to</span> — A GateWay, TO everywhere.
+      </p>
+      <p>© 2026 AGW · an airdb project · all hops reserved</p>
+    </div>
+  </footer>
+</Base>
