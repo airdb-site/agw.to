@@ -11,6 +11,8 @@ const {
   description =
     'agw.to is an ultra-fast, highly-available redirect gateway. Turn any URL into a short link, resolved at the edge in single-digit milliseconds.',
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -23,6 +25,8 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
