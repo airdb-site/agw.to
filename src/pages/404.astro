@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="404 — Link not found · agw.to" description="This short link doesn't resolve to anything. It may have expired or never existed.">
+  <section class="relative flex min-h-screen items-center overflow-hidden">
+    <div class="grid-bg absolute inset-0"></div>
+    <div class="hero-glow absolute inset-0"></div>
+
+    <div class="relative mx-auto w-full max-w-6xl px-6 py-24">
+      <p class="eyebrow mb-6">HTTP/2 404 — DESTINATION NOT FOUND</p>
+      <h1 class="display-wide text-6xl sm:text-8xl">
+        4<span class="text-amber">0</span>4
+      </h1>
+      <p class="mt-8 max-w-md text-lg leading-relaxed text-fog">
+        This link doesn't resolve to anything — it may have expired, been
+        rewired, or never existed at all.
+      </p>
+      <a
+        href="/"
+        class="mt-12 inline-block border border-amber/60 px-5 py-3 font-mono text-xs tracking-widest text-amber uppercase transition-colors hover:bg-amber hover:text-ink"
+      >
+        &larr; Back to agw.to
+      </a>
+    </div>
+  </section>
+</Base>
