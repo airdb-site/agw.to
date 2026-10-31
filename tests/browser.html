@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>AGW browser regression checks</title>
+<h1>AGW browser regression checks</h1>
+<p>Tests the built site in desktop and small mobile frames with JavaScript disabled.</p>
+<pre id="results">Running…</pre>
+<script type="module">
+  const results = [];
+  const check = (name, ok, detail = '') => results.push(`${ok ? 'PASS' : 'FAIL'} ${name}${ok ? '' : `: ${detail}`}`);
+  for (const width of [320, 375, 1024, 1280]) {
+    const frame = document.createElement('iframe');
+    frame.width = width;
+    frame.height = 812;
+    frame.sandbox = 'allow-same-origin';
+    frame.title = `${width}px without JavaScript`;
+    frame.src = '/';
+    const loaded = new Promise(resolve => frame.onload = resolve);
+    document.body.append(frame);
+    await loaded;
+    const doc = frame.contentDocument;
+    const win = frame.contentWindow;
+    await doc.fonts.ready;
+    // Allow the existing terminal animation to finish before measuring clipping.
+    await new Promise(resolve => setTimeout(resolve, 3500));
+    const hidden = [...doc.querySelectorAll('.reveal')].filter(el => win.getComputedStyle(el).opacity !== '1');
+    check(`${width}px content and contact visible without JS`, hidden.length === 0, `${hidden.length} transparent elements`);
+    const headline = doc.querySelector('h1');
+    check(`${width}px headline stays in its column`, headline.querySelector('span').getBoundingClientRect().right <= headline.getBoundingClientRect().right + 1, 'headline overflows');
+    const overflowingStats = [...doc.querySelectorAll('#network .stat-value')].filter(el => el.scrollWidth > el.clientWidth + 1);
+    check(`${width}px roadmap labels fit`, overflowingStats.length === 0, `${overflowingStats.length} overflowing labels`);
+    const command = doc.querySelector('.term-cmd');
+    const terminal = doc.querySelector('.term').getBoundingClientRect();
+    check(`${width}px terminal command fits card`, command.getBoundingClientRect().right <= terminal.right - 10 && command.scrollWidth <= command.clientWidth + 1, 'command clipped or outside card');
+    for (const link of doc.querySelectorAll('a[href^="#"]')) {
+      check(`${width}px ${link.hash} target exists`, !!doc.querySelector(link.hash));
+    }
+    win.location.hash = '#network';
+    await new Promise(resolve => setTimeout(resolve, 1200));
+    const network = doc.querySelector('#network').getBoundingClientRect();
+    const header = doc.querySelector('header').getBoundingClientRect();
+    check(`${width}px anchor clears fixed header`, network.top >= header.bottom - 1, `target top=${network.top}, header bottom=${header.bottom}`);
+  }
+  const missing = await fetch('/missing-regression-test');
+  check('unknown route returns 404', missing.status === 404);
+  check('404 offers a home link', (await missing.text()).includes('href="/"'));
+  document.querySelector('#results').textContent = results.join('\n');
+  document.title = `${results.some(line => line.startsWith('FAIL')) ? 'FAIL' : 'PASS'} — AGW regression checks`;
+</script>
+</html>

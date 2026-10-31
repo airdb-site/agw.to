@@ -20,6 +20,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -162,14 +163,14 @@ body {
 
 /* ---- reveal on scroll --------------------------------------------------- */
 
-.reveal {
+.reveal.reveal-pending {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
   transition-delay: var(--reveal-delay, 0s);
 }
 
-.reveal.is-visible {
+.reveal.reveal-pending.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -197,6 +198,18 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .term-cmd { animation-duration: 0.01s; animation-delay: 0s; }
   .packet, .marquee-inner, .cursor::after { animation: none; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal.reveal-pending { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
+}
+
+/* Keep the example readable on narrow phones instead of clipping the command. */
+@media (max-width: 480px) {
+  .term-cmd {
+    width: auto;
+    max-width: 100%;
+    margin-left: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    animation: none;
+  }
 }

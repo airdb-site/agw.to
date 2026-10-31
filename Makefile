@@ -1,5 +1,5 @@
 # LABEL Maintainer="dean"  Description="https://github.com/airdb-site"
-SERVICE := https://airdb.space
+SERVICE := https://agw.to
 
 all: help
 

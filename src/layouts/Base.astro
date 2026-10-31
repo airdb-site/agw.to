@@ -9,7 +9,7 @@ interface Props {
 const {
   title = 'agw.to — One short link, to everywhere',
   description =
-    'agw.to is an ultra-fast, highly-available redirect gateway. Turn any URL into a short link, resolved at the edge in single-digit milliseconds.',
+    'Explore agw.to, a planned short-link and redirect gateway. Learn about the roadmap for branded links, routing, and analytics.',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -51,7 +51,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         },
         { threshold: 0.15 },
       );
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      document.querySelectorAll('.reveal').forEach((el) => {
+        observer.observe(el);
+        el.classList.add('reveal-pending');
+      });
     </script>
   </body>
 </html>

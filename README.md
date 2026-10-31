@@ -37,7 +37,7 @@
 | P2 控制台 | 建链管理 + 基础统计 | 登录、创建/编辑短链、二维码、点击量报表 |
 | P3 平台化 | API + 智能路由 + 品牌域 | 开放 API、按设备/地域分流、客户自定义域名、计费 |
 
-## 4. 技术方案
+## 4. 技术方案（含未来规划）
 
 | 项 | 选型 | 理由 |
 |----|------|------|
@@ -46,7 +46,8 @@
 | 构建/任务 | Makefile(`make install / run / build`) | 已定,保持现状 |
 | 样式 | Tailwind CSS 4 | 已在依赖中 |
 | 跳转服务 | 建议 Cloudflare Workers + KV/D1(边缘 301/302,全球低延迟) | 官网静态托管与跳转逻辑分离,互不影响 |
-| 部署 | Cloudflare Pages(官网)+ Workers(跳转) | 同一平台,域名路由好切分:`/` 走官网,`/{slug}` 走 Worker |
+| 当前部署 | GitHub Pages（静态官网） | `.github/workflows/deploy-docs.yml` 在 main 推送后构建 dist 并发布至 gh-pages，CNAME 为 agw.to |
+| 未来跳转服务方案 | Cloudflare Workers + KV/D1 | 尚未在本仓库实现，需要另外设计、验证并部署 |
 
 ## 5. 官网信息架构(P1)
 
@@ -59,3 +60,17 @@
 ---
 
 *注:原 README 中 agw.bot(实体机器人)的品牌笔记已归档至 `docs/agw.bot-notes.md`,该项目有独立仓库 `../agw.bot`。*
+
+## 6. 当前实现与本地验证
+
+当前仓库只有首页和 404 页面，是产品介绍站，不提供建链、登录、统计 API 或真实短链跳转。首页终端是示意，不代表 `/launch` 已生效；功能卡片为路线规划。不要将规划中的服务能力视为已部署。
+
+使用 Node.js 26 和 package.json 指定的 pnpm 11.9.0：
+
+```sh
+pnpm install --frozen-lockfile
+pnpm build
+node tests/serve.mjs
+```
+
+打开 `http://127.0.0.1:4323/__tests`，等待标题显示 PASS。回归页在 320px、375px、1024px 和 1280px 沙箱 iframe 内禁用站点 JavaScript，验证内容/联系入口可见、标题和路线标签不溢出、终端命令不被裁切、锚点避开固定导航、链接锚点存在，以及本地未知路由返回 404。QA 服务仅绑定 127.0.0.1；测试文件不进入 dist。另需用浏览器检查启用 JavaScript 的首页与 404、375px 和桌面布局。
